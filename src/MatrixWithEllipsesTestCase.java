@@ -64,4 +64,20 @@ class MatrixWithEllipsesTestCase {
 		
 		assertEquals(expected, actual);
 	}
+	
+	@Test
+	void insert_value_function_modifies_array_properly_on_horizontal_ellipsis() throws Exception {
+		MatrixWithEllipses matrix = new MatrixWithEllipses();
+		matrix.insert_value(5, 1, 0);
+		
+		String expected = (
+			"0 " +  "5 " +  "0 " +  helps +  "0 \n" +
+			"0 " +  "0 " +  "0 " +  helps +  "0 \n" +
+			velps + velps + velps + drelps + velps + "\n" +
+			"0 " +  "0 " +   "0 " +  helps +  "0 \n"
+		);
+		String actual = matrix.toString();
+		
+		assertEquals(expected, actual);
+	}
 }

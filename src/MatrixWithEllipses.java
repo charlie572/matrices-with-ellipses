@@ -54,8 +54,15 @@ public class MatrixWithEllipses {
             	element.data = value;
             	break;
             case HORIZONTAL_ELLIPSIS:
+            	if (y < data.size()) {
+                    Element below = data.get(y + 1).get(x);
+                    if (below.type >= VERTICAL_ELLIPSIS || below.type == DOWN_RIGHT_ELLIPSIS)
+                        add_row(y);
+            	}
+
             	add_column(x);
             	add_column(x);
+            	
             	insert_value(value, x, y);
             	break;
 		}
@@ -68,12 +75,38 @@ public class MatrixWithEllipses {
 		}
 		list.set(index, element);
 	}
+
+	private static void list_insert(List<List<Element>> list, List<Element> row, int index) {
+		list.add(list.get(list.size() - 1));
+		for (int i = list.size() - 2; i > index; i--) {
+			list.set(i, list.get(i - 1));
+		}
+		list.set(index, row);
+	}
 	
 	private void add_column(int x) throws Exception {
 		for (int y = data.size() - 1; y >= 0; y--) {
+			Element new_element;
+			if (data.get(y).get(0).type == VERTICAL_ELLIPSIS)
+				new_element = new Element(0, VERTICAL_ELLIPSIS);
+			else
+				new_element = new Element(get(x, y), INTEGER);
 			List<Element> row = data.get(y);
-			list_insert(row, new Element(get(x, y), INTEGER), x);
+			list_insert(row, new_element, x);
 		}
+	}
+
+	private void add_row(int y) throws Exception {
+        List<Element> row = new ArrayList<Element>();
+        for (int x = 0; x < data.get(y).size(); x++) {
+			Element element;
+			if (data.get(0).get(x).type == HORIZONTAL_ELLIPSIS)
+				element = new Element(0, HORIZONTAL_ELLIPSIS);
+			else
+				element = new Element(get(x, y), INTEGER);
+            row.add(element);
+        }
+        list_insert(data, row, y);
 	}
 
 	public void insert_run(int value, int x1, int y1, int x2, int y2) {}
