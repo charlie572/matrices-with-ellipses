@@ -32,4 +32,15 @@ class MatrixWithEllipsesTestCase {
 		
 		assertEquals(expected, actual);
 	}
+	
+	@Test
+	void insert_value_function_works_in_top_left_corner() {
+		MatrixWithEllipses matrix = new MatrixWithEllipses();
+		matrix.insert_value(5, 0, 0);
+		
+		int expected = 5;
+		int actual = matrix.get(0, 0);
+		
+		assertEquals(expected, actual);
+	}
 }

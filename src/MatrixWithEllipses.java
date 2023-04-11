@@ -46,7 +46,9 @@ public class MatrixWithEllipses {
 		data.add(Arrays.asList(new Element(0, INTEGER), new Element(0, HORIZONTAL_ELLIPSIS), new Element(0, INTEGER)));
 	}
 
-	public void insert_value(int value, int x, int y) {}
+	public void insert_value(int value, int x, int y) {
+		data.get(y).get(x).data = value;
+	}
 
 	public void insert_run(int value, int x1, int y1, int x2, int y2) {}
 
