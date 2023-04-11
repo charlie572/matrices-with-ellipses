@@ -96,4 +96,20 @@ class MatrixWithEllipsesTestCase {
 		
 		assertEquals(expected, actual);
 	}
+	
+	@Test
+	void insert_in_top_right_corner() throws Exception {
+		MatrixWithEllipses matrix = new MatrixWithEllipses();
+		matrix.insert_value(5, 2, 0);
+		
+		String expected = (
+			"0 " +  helps +  "0 " +   "5 \n" +
+			"0 " +  helps +  "0 " +   "0 \n" +
+			velps + drelps + velps +  velps + "\n" +
+			"0 " +  helps +  "0 " +   "0 \n"
+		);
+		String actual = matrix.toString();
+		
+		assertEquals(expected, actual);
+	}
 }
