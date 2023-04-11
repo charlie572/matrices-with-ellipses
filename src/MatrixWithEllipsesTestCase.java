@@ -14,9 +14,9 @@ class MatrixWithEllipsesTestCase {
 		MatrixWithEllipses matrix = new MatrixWithEllipses();
 		
 		String expected = (
-            "0 "   + helps +  "0\n" +
-			velps + drelps + "0\n" +
-			"0 "   + helps +  "0"
+            "0 "   + helps +  "0 \n" +
+			velps + drelps +  velps + "\n" +
+			"0 "   + helps +  "0 \n"
         );
 		String actual = matrix.toString();
 		
