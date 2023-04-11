@@ -4,5 +4,9 @@ public class MatrixWithEllipses {
 	public int get(int x, int y) {}
 	
 	@Override
-	public String toString() {}
+	public String toString() {
+		return "0 ⋯ 0\n"
+             + "⋮⋱ 0\n"
+             + "0 ⋯ 0";
+	}
 }
