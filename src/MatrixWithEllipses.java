@@ -52,8 +52,16 @@ public class MatrixWithEllipses {
 
 	public void insert_run(int value, int x1, int y1, int x2, int y2) {}
 
-	public int get(int x, int y) {
-		return data.get(y).get(x).data;
+	public int get(int x, int y) throws Exception{
+		Element element =  data.get(y).get(x);
+		switch (element.type) {
+            case INTEGER:
+            	return element.data;
+            case HORIZONTAL_ELLIPSIS:
+            	return get(x - 1, y);
+            default:
+            	throw new Exception("Error in MatrixWithEllipses.get");
+		}
 	}
 	
 	@Override

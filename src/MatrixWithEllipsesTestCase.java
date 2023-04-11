@@ -24,7 +24,7 @@ class MatrixWithEllipsesTestCase {
 	}
 
 	@Test
-	void get_function_works_in_top_left_corner_initially() {
+	void get_function_works_in_top_left_corner_initially() throws Exception {
 		MatrixWithEllipses matrix = new MatrixWithEllipses();
 		
 		int expected = 0;
@@ -34,12 +34,22 @@ class MatrixWithEllipsesTestCase {
 	}
 	
 	@Test
-	void insert_value_function_works_in_top_left_corner() {
+	void insert_value_function_works_in_top_left_corner() throws Exception {
 		MatrixWithEllipses matrix = new MatrixWithEllipses();
 		matrix.insert_value(5, 0, 0);
 		
 		int expected = 5;
 		int actual = matrix.get(0, 0);
+		
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	void get_function_works_on_horizontal_ellipsis_initially() throws Exception {
+		MatrixWithEllipses matrix = new MatrixWithEllipses();
+		
+		int expected = 0;
+		int actual = matrix.get(1, 0);
 		
 		assertEquals(expected, actual);
 	}
