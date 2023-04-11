@@ -50,32 +50,41 @@ public class MatrixWithEllipses {
 	public void insert_value(int value, int x, int y) throws Exception {
 		Element element;
 
-        if (y < data.size() - 1) {
-            Element below = data.get(y + 1).get(x);
-            if (below.type == VERTICAL_ELLIPSIS || below.type == DOWN_RIGHT_ELLIPSIS)
-                add_row(y);
-        }
-        
-        if (x > 0) {
-        	Element right = data.get(y).get(x - 1);
-        	if (right.type == HORIZONTAL_ELLIPSIS) {
-        		add_column(x);
-        		x++;
-        	}
-        }
-        
-        if (x < data.get(0).size() - 1) {
-        	Element right = data.get(y).get(x + 1);
-        	if (right.type == HORIZONTAL_ELLIPSIS)
-        		add_column(x);
-        }
-
 		element = data.get(y).get(x);
         if (element.type == HORIZONTAL_ELLIPSIS) {
             add_column(x);
             add_column(x);
         }
         
+
+        if (x < data.get(0).size() - 1) {
+        	Element right = data.get(y).get(x + 1);
+        	if (right.type == HORIZONTAL_ELLIPSIS)
+        		add_column(x);
+        }
+        
+        if (y < data.size() - 1) {
+            Element below = data.get(y + 1).get(x);
+            if (below.type == VERTICAL_ELLIPSIS)
+                add_row(y);
+        }
+        
+        if (x > 0) {
+        	Element left = data.get(y).get(x - 1);
+        	if (left.type == HORIZONTAL_ELLIPSIS) {
+        		add_column(x);
+        		x++;
+        	}
+        }
+        
+        if (y > 0) {
+        	Element above = data.get(y - 1).get(x);
+        	if (above.type == VERTICAL_ELLIPSIS || above.type == DOWN_RIGHT_ELLIPSIS) {
+        		add_row(y);
+        		y++;
+        	}
+        }
+
         element = data.get(y).get(x);
         element.data = value;
 	}
