@@ -53,4 +53,15 @@ class MatrixWithEllipsesTestCase {
 		
 		assertEquals(expected, actual);
 	}
+
+	@Test
+	void insert_value_function_works_on_horizontal_ellipsis() throws Exception {
+		MatrixWithEllipses matrix = new MatrixWithEllipses();
+		matrix.insert_value(5, 1, 0);
+		
+		int expected = 5;
+		int actual = matrix.get(1, 0);
+		
+		assertEquals(expected, actual);
+	}
 }

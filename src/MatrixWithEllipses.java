@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Arrays;
 
 public class MatrixWithEllipses {
@@ -41,13 +42,38 @@ public class MatrixWithEllipses {
 	
 	public MatrixWithEllipses() {
 		data = new ArrayList<List<Element>>();
-		data.add(Arrays.asList(new Element(0, INTEGER), new Element(0, HORIZONTAL_ELLIPSIS), new Element(0, INTEGER)));
-		data.add(Arrays.asList(new Element(0, VERTICAL_ELLIPSIS), new Element(0, DOWN_RIGHT_ELLIPSIS), new Element(0, VERTICAL_ELLIPSIS)));
-		data.add(Arrays.asList(new Element(0, INTEGER), new Element(0, HORIZONTAL_ELLIPSIS), new Element(0, INTEGER)));
+		data.add(new ArrayList<Element>(Arrays.asList(new Element(0, INTEGER), new Element(0, HORIZONTAL_ELLIPSIS), new Element(0, INTEGER))));
+		data.add(new ArrayList<Element>(Arrays.asList(new Element(0, VERTICAL_ELLIPSIS), new Element(0, DOWN_RIGHT_ELLIPSIS), new Element(0, VERTICAL_ELLIPSIS))));
+		data.add(new ArrayList<Element>(Arrays.asList(new Element(0, INTEGER), new Element(0, HORIZONTAL_ELLIPSIS), new Element(0, INTEGER))));
 	}
 
-	public void insert_value(int value, int x, int y) {
-		data.get(y).get(x).data = value;
+	public void insert_value(int value, int x, int y) throws Exception {
+		Element element = data.get(y).get(x);
+		switch (element.type) {
+            case INTEGER:
+            	element.data = value;
+            	break;
+            case HORIZONTAL_ELLIPSIS:
+            	add_column(x);
+            	add_column(x);
+            	insert_value(value, x, y);
+            	break;
+		}
+	}
+	
+	private static void list_insert(List<Element> list, Element element, int index) {
+		list.add(list.get(list.size() - 1));
+		for (int i = list.size() - 2; i > index; i--) {
+			list.set(i, list.get(i - 1));
+		}
+		list.set(index, element);
+	}
+	
+	private void add_column(int x) throws Exception {
+		for (int y = data.size() - 1; y >= 0; y--) {
+			List<Element> row = data.get(y);
+			list_insert(row, new Element(get(x, y), INTEGER), x);
+		}
 	}
 
 	public void insert_run(int value, int x1, int y1, int x2, int y2) {}
@@ -59,6 +85,12 @@ public class MatrixWithEllipses {
             	return element.data;
             case HORIZONTAL_ELLIPSIS:
             	return get(x - 1, y);
+            case VERTICAL_ELLIPSIS:
+            	return get(x, y - 1);
+            case DOWN_RIGHT_ELLIPSIS:
+            	return get(x - 1, y - 1);
+            case UP_RIGHT_ELLIPSIS:
+            	return get(x - 1, y + 1);
             default:
             	throw new Exception("Error in MatrixWithEllipses.get");
 		}
