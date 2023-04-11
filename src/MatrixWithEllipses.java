@@ -48,24 +48,28 @@ public class MatrixWithEllipses {
 	}
 
 	public void insert_value(int value, int x, int y) throws Exception {
-		Element element = data.get(y).get(x);
-		switch (element.type) {
-            case INTEGER:
-            	element.data = value;
-            	break;
-            case HORIZONTAL_ELLIPSIS:
-            	if (y < data.size()) {
-                    Element below = data.get(y + 1).get(x);
-                    if (below.type >= VERTICAL_ELLIPSIS || below.type == DOWN_RIGHT_ELLIPSIS)
-                        add_row(y);
-            	}
+		Element element;
 
-            	add_column(x);
-            	add_column(x);
-            	
-            	insert_value(value, x, y);
-            	break;
-		}
+        if (y < data.size() - 1) {
+            Element below = data.get(y + 1).get(x);
+            if (below.type == VERTICAL_ELLIPSIS || below.type == DOWN_RIGHT_ELLIPSIS)
+                add_row(y);
+        }
+        
+        if (x < data.size() - 1) {
+        	Element right = data.get(y).get(x + 1);
+        	if (right.type == HORIZONTAL_ELLIPSIS)
+        		add_column(x);
+        }
+
+		element = data.get(y).get(x);
+        if (element.type == HORIZONTAL_ELLIPSIS) {
+            add_column(x);
+            add_column(x);
+        }
+        
+        element = data.get(y).get(x);
+        element.data = value;
 	}
 	
 	private static void list_insert(List<Element> list, Element element, int index) {
