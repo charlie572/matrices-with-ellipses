@@ -12,8 +12,8 @@ public class MatrixWithEllipses {
 	public final static int UP_RIGHT_ELLIPSIS = 4;
 	
 	private static class Element {
-		private int data;
-		private int type;
+		public int data;
+		public int type;
 		
 		public Element(int data, int type) {
 			this.data = data;
@@ -50,7 +50,9 @@ public class MatrixWithEllipses {
 
 	public void insert_run(int value, int x1, int y1, int x2, int y2) {}
 
-	public int get(int x, int y) {}
+	public int get(int x, int y) {
+		return data.get(y).get(x).data;
+	}
 	
 	@Override
 	public String toString() {

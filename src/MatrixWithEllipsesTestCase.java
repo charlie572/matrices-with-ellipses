@@ -23,4 +23,13 @@ class MatrixWithEllipsesTestCase {
 		assertEquals(expected, actual);
 	}
 
+	@Test
+	void get_function_works_in_top_left_corner_initially() {
+		MatrixWithEllipses matrix = new MatrixWithEllipses();
+		
+		int expected = 0;
+		int actual = matrix.get(0, 0);
+		
+		assertEquals(expected, actual);
+	}
 }
