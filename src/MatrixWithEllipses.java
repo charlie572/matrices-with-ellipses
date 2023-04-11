@@ -55,7 +55,6 @@ public class MatrixWithEllipses {
             add_column(x);
             add_column(x);
         }
-        
 
         if (x < data.get(0).size() - 1) {
         	Element right = data.get(y).get(x + 1);
