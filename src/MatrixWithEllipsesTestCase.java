@@ -193,4 +193,21 @@ class MatrixWithEllipsesTestCase {
 		
 		assertEquals(expected, actual);
 	}
+
+	@Test
+	void insert_run_on_middle_row() throws Exception {
+		MatrixWithEllipses matrix = new MatrixWithEllipses();
+		matrix.insert_row(5, 1);
+
+		String expected = (
+			"0 " +  helps +  "0 \n" +
+			"5 " +  helps +  "5 \n" +
+			"0 " +  helps +  "0 \n" +
+			velps + drelps + velps + "\n" +
+			"0 " +  helps +  "0 \n"
+		);
+		String actual = matrix.toString();
+		
+		assertEquals(expected, actual);
+	}
 }
