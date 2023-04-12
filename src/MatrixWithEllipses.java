@@ -137,6 +137,10 @@ public class MatrixWithEllipses {
 	public void insert_row(int value, int y) throws Exception {
 		if (y < data.size() - 1 && data.get(y + 1).get(0).type == VERTICAL_ELLIPSIS)
 			add_row(y);
+		if (y > 0 && data.get(y - 1).get(0).type == VERTICAL_ELLIPSIS) {
+			add_row(y);
+			y++;
+		}
 
 		for (int x = 0; x < data.get(0).size(); x++) {
 			Element element = data.get(y).get(x);
