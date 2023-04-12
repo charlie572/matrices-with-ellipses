@@ -210,4 +210,49 @@ class MatrixWithEllipsesTestCase {
 		
 		assertEquals(expected, actual);
 	}
+
+	@Test
+	void insert_run_on_left_column() throws Exception {
+		MatrixWithEllipses matrix = new MatrixWithEllipses();
+		matrix.insert_column(5, 0);
+
+		String expected = (
+			"5 " +  "0 " +  helps +  "0 \n" +
+			velps + velps + drelps + velps + "\n" +
+			"5 " +  "0 " +  helps +  "0 \n"
+		);
+		String actual = matrix.toString();
+		
+		assertEquals(expected, actual);
+	}
+
+	@Test
+	void insert_run_on_right_column() throws Exception {
+		MatrixWithEllipses matrix = new MatrixWithEllipses();
+		matrix.insert_column(5, 2);
+
+		String expected = (
+			"0 " +  helps +  "0 " +  "5 \n" +
+			velps + drelps + velps + velps + "\n" +
+			"0 " +  helps +  "0 " +  "5 \n"
+		);
+		String actual = matrix.toString();
+		
+		assertEquals(expected, actual);
+	}
+
+	@Test
+	void insert_run_on_middle_column() throws Exception {
+		MatrixWithEllipses matrix = new MatrixWithEllipses();
+		matrix.insert_column(5, 1);
+
+		String expected = (
+			"0 " +  "5 " +  "0 " +  helps +  "0 \n" +
+			velps + velps + velps + drelps + velps + "\n" +
+			"0 " +  "5 " +  "0 " +  helps +  "0 \n"
+		);
+		String actual = matrix.toString();
+		
+		assertEquals(expected, actual);
+	}
 }

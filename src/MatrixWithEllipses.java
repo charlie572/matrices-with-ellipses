@@ -151,6 +151,23 @@ public class MatrixWithEllipses {
 		}
 	}
 
+	public void insert_column(int value, int x) throws Exception {
+		if (data.get(0).get(x).type == HORIZONTAL_ELLIPSIS)
+			add_column(x);
+		if (x < data.get(0).size() - 1 && data.get(0).get(x + 1).type == HORIZONTAL_ELLIPSIS)
+			add_column(x);
+		if (x > 0 && data.get(0).get(x - 1).type == HORIZONTAL_ELLIPSIS) {
+			add_column(x);
+			x++;
+		}
+
+		for (int y = 0; y < data.size(); y++) {
+			Element element = data.get(y).get(x);
+			if (element.type == INTEGER)
+				element.data = value;
+		}
+	}
+
 	public int get(int x, int y) throws Exception{
 		Element element =  data.get(y).get(x);
 		switch (element.type) {
