@@ -54,6 +54,11 @@ public class MatrixWithEllipses {
         if (element.type == HORIZONTAL_ELLIPSIS) {
             add_column(x);
             add_column(x);
+        } else if (element.type == DOWN_RIGHT_ELLIPSIS) {
+        	add_row(x);
+        	add_row(x);
+        	add_column(y);
+        	add_column(y);
         }
 
         if (x < data.get(0).size() - 1) {

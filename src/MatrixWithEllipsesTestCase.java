@@ -144,4 +144,21 @@ class MatrixWithEllipsesTestCase {
 		
 		assertEquals(expected, actual);
 	}
+
+	@Test
+	void insert_on_diagonal_ellipsis() throws Exception {
+		MatrixWithEllipses matrix = new MatrixWithEllipses();
+		matrix.insert_value(5, 1, 1);
+		
+		String expected = (
+			"0 " +  "0 " +  "0 " +  helps +  "0 \n" +
+			"0 " +  "5 " +  "0 " +  helps +  "0 \n" +
+			"0 " +  "0 " +  "0 " +  helps +  "0 \n" +
+			velps + velps + velps + drelps + velps + "\n" +
+			"0 " +  "0 " +  "0 " +  helps +  "0 \n"
+		);
+		String actual = matrix.toString();
+		
+		assertEquals(expected, actual);
+	}
 }
