@@ -255,4 +255,21 @@ class MatrixWithEllipsesTestCase {
 		
 		assertEquals(expected, actual);
 	}
+
+	@Test
+	void insert_run_on_diagonal() throws Exception {
+		MatrixWithEllipses matrix = new MatrixWithEllipses();
+		matrix.insert_down_right_diagonal(5, 0, 0);
+
+		String expected = (
+			"5 " +  "0 " +  helps +  "0 " +  "0 \n" +
+			"0 " +  "5 " +  helps +  "0 " +  "0 \n" +
+			velps + velps + drelps + velps + velps + "\n" +
+			"0 " +  "0 " +  helps +  "5 " +  "0 \n" +
+			"0 " +  "0 " +  helps +  "0 " +  "5 \n"
+		);
+		String actual = matrix.toString();
+		
+		assertEquals(expected, actual);
+	}
 }

@@ -167,6 +167,34 @@ public class MatrixWithEllipses {
 				element.data = value;
 		}
 	}
+	
+	public void insert_down_right_diagonal(int value, int x, int y) throws Exception {
+		while (x < data.get(0).size() && y < data.size()) {
+			if (x < data.get(0).size() - 1 && data.get(y).get(x + 1).type == HORIZONTAL_ELLIPSIS) {
+				add_column(x + 1);
+				add_row(y + 1);
+				data.get(y).get(x).data = value;
+				data.get(y + 1).get(x + 1).data = value;
+				x += 2; y += 2;
+				continue;
+			}
+
+			if (x > 0 && data.get(y).get(x - 1).type == HORIZONTAL_ELLIPSIS) {
+				add_column(x);
+				add_row(y);
+				data.get(y).get(x).data = value;
+				data.get(y + 1).get(x + 1).data = value;
+				x += 2; y += 2;
+				continue;
+			}
+
+			Element element = data.get(y).get(x);
+			if (element.type == INTEGER)
+				element.data = value;
+
+			x++; y++;
+		}
+	}
 
 	public int get(int x, int y) throws Exception{
 		Element element =  data.get(y).get(x);
