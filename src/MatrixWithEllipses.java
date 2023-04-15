@@ -188,10 +188,25 @@ public class MatrixWithEllipses {
 				continue;
 			}
 
-			Element element = data.get(y).get(x);
-			if (element.type == INTEGER)
-				element.data = value;
+			if (data.get(y).get(x).type == HORIZONTAL_ELLIPSIS) {
+				add_column(x);
+				add_row(y);
+				data.get(y).get(x).data = value;
+				data.get(y + 1).get(x + 1).type = DOWN_RIGHT_ELLIPSIS;
+				
+				if (data.get(y + 2).get(x + 2).type == VERTICAL_ELLIPSIS) {
+					add_column(x + 2);
+					add_row(y + 3);
+					data.get(y + 2).get(x + 2).type = DOWN_RIGHT_ELLIPSIS;
+					data.get(y + 3).get(x + 3).data = value;
+					x += 2; y += 2;
+				}
 
+				x += 2; y += 2;
+				continue;
+			}
+
+			data.get(y).get(x).data = value;
 			x++; y++;
 		}
 	}
